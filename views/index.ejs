@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
@@ -14,25 +13,29 @@
         <h1 class="header">Think fast, type faster!</h1>
       </div>
       <div id="login">
-        <form action="login" method="POST">
-          <!-- <div class="form"> -->
-            login<br />
-            <input type="text" id="loginData" name="login" required /><br />
-            password <br />
-            <input type="password" name="password" /><br />
-            <button type="submit">sign in</button>
-          <!-- </div> -->
+        <form action="auth/login" method="POST">
+          login<br />
+          <input type="text" id="loginData" name="name" required /><br />
+          password <br />
+          <input type="password" name="password" /><br />
+          <button type="submit">sign in</button>
         </form>
       </div>
       <div id="register">
-        <form action="register" method="POST" id="registerForm">
-          <!-- <div class="form"> -->
-            login<br />
-            <input type="text" name="login" required /><br />
-            password<br />
-            <input type="password" v-model="password" name="password" id="passwordData" required /><br />
-            <button type="submit" id="registered">register</button>
-          <!-- </div> -->
+        <form action="auth/register" method="POST" id="registerForm">
+          login<br />
+          <input type="text" name="name" required /><br />
+          password<br />
+          <input
+            type="password"
+            v-model="password"
+            name="password"
+            id="passwordData"
+            required
+          /><br />
+          <button @click="validate" ref="submit" id="registered">
+            registera
+          </button>
         </form>
       </div>
       <div id="infoContainer">
@@ -62,12 +65,22 @@
       </div>
     </div>
     <script>
-
+      var app = new Vue({
+        el: "#register",
+        data: {
+          password: "",
+        },
+        methods: {
+          validate() {
+            let strongPassword = new RegExp(
+              "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"
+            )
+            if (!strongPassword.test(this.password)) {
+              alert('Your password has to be strong!')
+            }          
+          },
+        },
+      });
     </script>
   </body>
 </html>
-
-
-
-
-
