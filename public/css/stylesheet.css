@@ -1,0 +1,121 @@
+﻿@font-face {
+    font-family: Bebas Neue;
+    src: url(fonts/BebasNeue-Regular.ttf);
+}
+
+@font-face{
+    font-family: Montserrat;
+    src: url(fonts/Montserrat-Light.ttf)
+}
+
+:root {
+    --text-font: Bebas Neue;
+    --text-font2: Montserrat;
+}
+
+#container {
+    width: 770px;
+    height: auto;
+    margin: auto;
+    border-style: solid;
+    border-color: #c61aff;
+    box-shadow: inset 0px 0px 4px 4px #c61aff;
+}
+
+#banner {
+    height: 100px;
+    background-color: #8600b3;
+    box-shadow: inset 0px 0px 4px 4px #c61aff;
+    opacity: 0.8;
+    padding-top: 20px;
+    margin-bottom: 5px;
+}
+
+#login {
+    font-family: var(--text-font);
+    font-size: 18px;
+    height: auto;
+    width: 280px;
+    padding: 0px 50px 10px;
+    display: inline-block;
+ 
+}
+
+#register {
+    font-size: 18px;
+    font-family: var(--text-font);
+    height: auto;
+    width: 280px;
+    padding: 0px 50px 10px;
+    display: inline-block;
+
+}
+
+#infoContainer {
+    margin-top: 5px;
+    height: auto;
+    clear: both;
+    border-top-style: solid;
+    border-top-color: #c61aff;
+    box-shadow: inset 0px 0px 4px 4px #c61aff;
+    font-family: var(--text-font2);
+    font-size: 22px;
+    padding: 10px 15px 10px 15px;
+
+}
+
+#footer {
+    height: auto;
+    width: auto;
+    background-color: #8600b3;
+    opacity: 0.8;
+    box-shadow: inset 0px 0px 4px 4px #c61aff;
+    text-align: center;
+    padding: auto;
+}
+
+.img1 {
+    margin-left:225px;
+}
+
+.form {
+    width: 300px;
+    margin: auto;
+}
+
+input[type=text], input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 4px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    font-family: var(--text-font);
+    font-size: 15px;
+    width: 250px;
+    height: 25px;
+    display: block;
+    margin: 4px auto;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.header {
+    font-family: var(--text-font);
+    font-size: 60px;
+    margin: 0px;
+    text-align: center;
+}
+
+.footer {
+    font-family: var(--text-font);
+    font-size: 40px;
+    margin: 0px;
+    text-align: center;
+}
+

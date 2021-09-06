@@ -1,0 +1,73 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <div id="container">
+      <div id="banner">
+        <h1 class="header">Think fast, type faster!</h1>
+      </div>
+      <div id="login">
+        <form action="login" method="POST">
+          <!-- <div class="form"> -->
+            login<br />
+            <input type="text" id="loginData" name="login" required /><br />
+            password <br />
+            <input type="password" name="password" /><br />
+            <button type="submit">sign in</button>
+          <!-- </div> -->
+        </form>
+      </div>
+      <div id="register">
+        <form action="register" method="POST" id="registerForm">
+          <!-- <div class="form"> -->
+            login<br />
+            <input type="text" name="login" required /><br />
+            password<br />
+            <input type="password" v-model="password" name="password" id="passwordData" required /><br />
+            <button type="submit" id="registered">register</button>
+          <!-- </div> -->
+        </form>
+      </div>
+      <div id="infoContainer">
+        <p1 class="text">
+          Touch typing is all about the idea that each finger has its own area
+          on the keyboard. Thanks to that fact you can type without looking at
+          the keys. Practice regularly and your fingers will learn their
+          location on the keyboard through muscle memory. </p1
+        ><br /><br />
+        <img
+          src="img/fastTyping.png"
+          class="img1"
+          alt="Girl in a jacket"
+          width="300"
+          height="159"
+        />
+        <br />
+        <p2>
+          Your left-hand fingers should be placed over the A, S, D, and F keys,
+          and the right-hand fingers should be placed over the J, K, L, and ;
+          keys. These keys are considered the home row keys. Your thumbs should
+          either be in the air or very lightly touching the spacebar key.
+        </p2>
+      </div>
+      <div id="footer">
+        <h1 class="footer">&copy; Copyright 2021</h1>
+      </div>
+    </div>
+    <script>
+
+    </script>
+  </body>
+</html>
+
+
+
+
+
