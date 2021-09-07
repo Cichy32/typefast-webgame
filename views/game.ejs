@@ -1,24 +1,50 @@
 <!DOCTYPE html>
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <title></title>
   </head>
   <body>
     <div id="container">
-      <div id="banner">
+      <div id="banner" >
         <h1 class="header">Think fast, type faster!</h1>
       </div>
       <div id="infoContainer">
+        <p>Hi <%=testObject%>!</p>
+        <p>In order to start the game click button bellow.</p>
+        <!-- <textarea placeholder="add multiple lines"></textarea> -->
+        <!-- <button v-on:click="getText()">Check fetch</button>  v-if="text"-->
+        <button v-on:click="startGame()" v-if="gameStoped">Start game</button>
       </div>
       <div id="footer">
         <h1 class="footer">&copy; Copyright 2021</h1>
       </div>
     </div>
     <script>
+      var app = new Vue({
+        el: "#container",
+        data: {
+          text: null,
+          gameStoped: true,
+        },
+        methods: {
+          getText() {
+            fetch('/text',{
+              method: 'GET',
+              mode: "cors"
+            })
+              .then( res => data = res.json())
+              .then(data => this.text = data)
+              .catch(err => console.log(err.message))
+          },
+          startGame(){
+            app.gameStoped = false
+          }
+        },
+      });
     </script>
   </body>
 </html>
