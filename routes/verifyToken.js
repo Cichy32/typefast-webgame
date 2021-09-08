@@ -1,5 +1,7 @@
+// Import jsonwebtoken
 const jwt = require('jsonwebtoken')
 
+// auth function
 function auth (req,res,next){
     const token = req.header('autk-token')
     if(!token) return res.status(401).send('Access Denied')

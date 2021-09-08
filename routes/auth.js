@@ -1,3 +1,4 @@
+//auth route module
 const { register, login } = require('../controllers/auth')
 
 //import only router

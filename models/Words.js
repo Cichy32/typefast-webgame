@@ -1,3 +1,4 @@
+// create words model
 const mongoose = require('mongoose')
 
 const Words = new mongoose.Schema({

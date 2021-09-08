@@ -1,4 +1,4 @@
-// validation
+// validation controller
 const Joi = require('joi')
 
 //naming

@@ -1,7 +1,8 @@
 const axios = require('axios')
 const Words = require('../models/Words')
 
-//Fix naming
+// TO DO
+// Fix naming
 async function saveCreatedWords (wordsAmount){
     const url = 'https://random-word-api.herokuapp.com/word?number='
     const finalUrl = url+wordsAmount

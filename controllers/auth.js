@@ -1,3 +1,4 @@
+// auth controller
 const User = require('../models/User')
 const {registerValidation} = require('../controllers/validation')
 const bcrypt = require('bcrypt')

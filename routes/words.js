@@ -1,3 +1,4 @@
+// words route module
 const { createWords, getAllWords, getWords } = require('../controllers/words')
 
 const router = require('express').Router()
