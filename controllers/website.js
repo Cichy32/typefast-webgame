@@ -6,6 +6,6 @@ exports.renderSite = (req,res) =>{
 // test response to website
 exports.getText = (req,res) =>{
     res.json({
-        super: 'tak'
+        "text": ["This is the first text", "This is the second text", "This is the third text"]
     })
 }

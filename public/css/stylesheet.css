@@ -119,3 +119,8 @@ button {
     text-align: center;
 }
 
+textarea{
+   min-width: 100%;
+   font-size: 19px;
+    
+}

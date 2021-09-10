@@ -9,15 +9,34 @@
   </head>
   <body>
     <div id="container">
-      <div id="banner" >
+      <div id="banner">
         <h1 class="header">Think fast, type faster!</h1>
       </div>
       <div id="infoContainer">
-        <p>Hi <%=testObject%>!</p>
-        <p>In order to start the game click button bellow.</p>
-        <!-- <textarea placeholder="add multiple lines"></textarea> -->
+        <p v-if="gameStoped && startCounter == false">Hi <%=testObject%>!</p>
+        <p v-if="gameStoped && startCounter == false">
+          In order to start the game click button bellow.
+        </p>
+        <button
+          v-on:click="startGame()"
+          v-if="gameStoped && startCounter==false"
+        >
+          Start game
+        </button>
+        <button v-on:click="validateInput()">Index</button>
+        <p v-if="startCounter">
+          Get ready. Game is about to start! {{ counter }}
+        </p>
+        <p v-if="startCounter || gameStoped == false">
+          Type given text as fast as you can. Good luck!{{gameCounter}}
+        </p>
+        <p v-if="gameStoped==false">{{ text[1] }}</p>
+        <textarea
+          v-if="gameStoped==false"
+          placeholder="add multiple lines"
+          id="inputField"
+        ></textarea>
         <!-- <button v-on:click="getText()">Check fetch</button>  v-if="text"-->
-        <button v-on:click="startGame()" v-if="gameStoped">Start game</button>
       </div>
       <div id="footer">
         <h1 class="footer">&copy; Copyright 2021</h1>
@@ -28,22 +47,68 @@
       var app = new Vue({
         el: "#container",
         data: {
-          text: null,
+          text: JSON,
           gameStoped: true,
+          counter: 5,
+          startCounter: false,
+          gameCounter: 0,
         },
         methods: {
           getText() {
-            fetch('/text',{
-              method: 'GET',
-              mode: "cors"
+            fetch("/text", {
+              method: "GET",
+              mode: "cors",
             })
-              .then( res => data = res.json())
-              .then(data => this.text = data)
-              .catch(err => console.log(err.message))
+              .then((res) => (data = res.json()))
+              .then((data) => (this.text = data.text))
+              .catch((err) => console.log(err.message));
           },
-          startGame(){
-            app.gameStoped = false
-          }
+          intervalCounter() {
+            let n = 0;
+            let interval = setInterval(function () {
+              if (n == 4) {
+                clearInterval(interval)
+                app.getText()
+                app.gameStoped = false
+                app.startCounter = false
+                app.gameCounterFunction()
+                app.validateInput()
+              }
+              n++;
+              app.counter = app.counter - 1;
+            }, 100);
+          },
+          startGame() {
+            app.startCounter = true;
+            app.intervalCounter();
+          },
+          validateInput(text) {
+            let i = 0;
+            let interval = setInterval(function () {
+              i++;
+              let inputField = document.getElementById("inputField").value;
+              let index = inputField.length;
+              let originalText = app.text[1].slice(0, index);
+              let originalLength = app.text[1].length
+              if(index<originalLength){
+                if (inputField == originalText) {
+                  document.getElementById("inputField").style = "color: green";
+                } else {
+                   document.getElementById("inputField").style = "color: red";
+                } 
+              }else{
+                clearInterval(interval)
+                alert("Well done! Your time: "+app.gameCounter+"seconds")
+              }
+            }, 100);
+          },
+          gameCounterFunction() {
+            let n = 0;
+            let interval = setInterval(function () {
+              n++;
+              app.gameCounter = app.gameCounter +1;
+            }, 1000);
+          },
         },
       });
     </script>
