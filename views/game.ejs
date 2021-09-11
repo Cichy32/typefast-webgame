@@ -14,29 +14,13 @@
       </div>
       <div id="infoContainer">
         <p v-if="gameStoped && startCounter == false">Hi <%=testObject%>!</p>
-        <p v-if="gameStoped && startCounter == false">
-          In order to start the game click button bellow.
-        </p>
-        <button
-          v-on:click="startGame()"
-          v-if="gameStoped && startCounter==false"
-        >
-          Start game
-        </button>
-        <button v-on:click="validateInput()">Index</button>
-        <p v-if="startCounter">
-          Get ready. Game is about to start! {{ counter }}
-        </p>
-        <p v-if="startCounter || gameStoped == false">
-          Type given text as fast as you can. Good luck!{{gameCounter}}
-        </p>
-        <p v-if="gameStoped==false">{{ text[1] }}</p>
-        <textarea
-          v-if="gameStoped==false"
-          placeholder="add multiple lines"
-          id="inputField"
-        ></textarea>
-        <!-- <button v-on:click="getText()">Check fetch</button>  v-if="text"-->
+        <p v-if="gameStoped && startCounter == false">In order to start the game click button bellow.</p>
+        <button v-on:click="startGame()"v-if="gameStoped && startCounter==false">Start game</button>
+        <p v-if="startCounter">Get ready. Game is about to start! {{ counter }}</p>
+        <p v-if="startCounter || gameStoped == false">Type given text as fast as you can. Good luck!</p>
+        <p v-if="gameStoped==false">Time: {{ gameCounter }}s  WPM: {{ wpm }}</p>
+        <p v-if="gameStoped==false">"{{ text[1] }}"</p>
+        <textarea v-if="gameStoped==false"placeholder="Type here"id="inputField"></textarea>
       </div>
       <div id="footer">
         <h1 class="footer">&copy; Copyright 2021</h1>
@@ -52,6 +36,7 @@
           counter: 5,
           startCounter: false,
           gameCounter: 0,
+          wpm: 0,
         },
         methods: {
           getText() {
@@ -67,16 +52,16 @@
             let n = 0;
             let interval = setInterval(function () {
               if (n == 4) {
-                clearInterval(interval)
-                app.getText()
-                app.gameStoped = false
-                app.startCounter = false
-                app.gameCounterFunction()
-                app.validateInput()
+                clearInterval(interval);
+                app.getText();
+                app.gameStoped = false;
+                app.startCounter = false;
+                app.gameCounterFunction();
+                app.validateInput();
               }
               n++;
               app.counter = app.counter - 1;
-            }, 100);
+            }, 1000);
           },
           startGame() {
             app.startCounter = true;
@@ -89,24 +74,35 @@
               let inputField = document.getElementById("inputField").value;
               let index = inputField.length;
               let originalText = app.text[1].slice(0, index);
-              let originalLength = app.text[1].length
-              if(index<originalLength){
+              let originalLength = app.text[1].length;
+              if (index < originalLength) {
                 if (inputField == originalText) {
+                  app.wpm = Math.round(index / 5 / (app.gameCounter / 60));
                   document.getElementById("inputField").style = "color: green";
                 } else {
-                   document.getElementById("inputField").style = "color: red";
-                } 
-              }else{
-                clearInterval(interval)
-                alert("Well done! Your time: "+app.gameCounter+"seconds")
+                  document.getElementById("inputField").style = "color: red";
+                }
+              } else {
+                clearInterval(interval);
+                alert(
+                  "Well done! Your time: " +
+                    app.gameCounter +
+                    "seconds. Your score: " +
+                    Math.round(index / 5 / (app.gameCounter / 60)) +
+                    "WPM"
+                );
+                app.gameStoped = true;
               }
-            }, 100);
+            }, 500);
           },
           gameCounterFunction() {
-            let n = 0;
+            app.gameCounter = 0;
             let interval = setInterval(function () {
-              n++;
-              app.gameCounter = app.gameCounter +1;
+              if (app.gameStoped) {
+                clearInterval(interval);
+              } else {
+                app.gameCounter = app.gameCounter + 1;
+              }
             }, 1000);
           },
         },

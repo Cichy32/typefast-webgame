@@ -13,6 +13,10 @@
     --text-font2: Montserrat;
 }
 
+.f1{
+    font-family: var(--text-font)
+}
+
 #container {
     width: 770px;
     height: auto;
@@ -54,6 +58,7 @@
 #infoContainer {
     margin-top: 5px;
     height: auto;
+    min-height: 400px;
     clear: both;
     border-top-style: solid;
     border-top-color: #c61aff;
