@@ -13,7 +13,7 @@
         <h1 class="header">Think fast, type faster!</h1>
       </div>
       <div id="infoContainer">
-        <p v-if="gameStoped && startCounter == false">Hi <%=testObject%>!</p>
+        <p v-if="gameStoped && startCounter == false">Hi <%=testObject%>! Your highest score: {{highestScore}}</p>
         <p v-if="gameStoped && startCounter == false">In order to start the game click button bellow.</p>
         <button v-on:click="startGame()"v-if="gameStoped && startCounter==false">Start game</button>
         <p v-if="startCounter">Get ready. Game is about to start! {{ counter }}</p>
@@ -37,16 +37,45 @@
           startCounter: false,
           gameCounter: 0,
           wpm: 0,
+          highestScore: 0,
         },
         methods: {
-          getText() {
-            fetch("/text", {
+          async getText() {
+            await fetch("/text", {
               method: "GET",
               mode: "cors",
             })
               .then((res) => (data = res.json()))
               .then((data) => (this.text = data.text))
               .catch((err) => console.log(err.message));
+          },
+          postScore(score){
+            fetch("/score/save",{
+              method: "POST",
+              mode: "cors",
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "name": "<%=testObject%>",
+                "score": score
+              })
+            })
+          },
+          async getHighestScore(){
+            await fetch("/score/highest",{
+              method: "POST",
+              mode: "cors",
+              headers: {
+                'Content-type': 'application/json'
+              },
+              body: JSON.stringify({
+                "name": "<%=testObject%>"
+              })
+            })
+            .then((res) => (data = res.json()))
+            .then((data) => (this.highestScore = data))
+            .catch((err) => console.log(err.message));
           },
           intervalCounter() {
             let n = 0;
@@ -77,7 +106,7 @@
               let originalLength = app.text[1].length;
               if (index < originalLength) {
                 if (inputField == originalText) {
-                  app.wpm = Math.round(index / 5 / (app.gameCounter / 60));
+                  app.wpm = index / 5 / (app.gameCounter / 60);
                   document.getElementById("inputField").style = "color: green";
                 } else {
                   document.getElementById("inputField").style = "color: red";
@@ -88,10 +117,13 @@
                   "Well done! Your time: " +
                     app.gameCounter +
                     "seconds. Your score: " +
-                    Math.round(index / 5 / (app.gameCounter / 60)) +
+                    Math.round((index / 5) / (app.gameCounter / 60)) +
                     "WPM"
                 );
+                app.postScore(Math.round((index / 5) / (app.gameCounter / 60)))
+                setTimeout(() => {app.getHighestScore()}, 200);
                 app.gameStoped = true;
+                app.counter = 5;
               }
             }, 500);
           },
@@ -107,6 +139,7 @@
           },
         },
       });
+      app.getHighestScore()
     </script>
   </body>
 </html>

@@ -6,6 +6,7 @@ const { createWords: getWords } = require('./controllers/words')
 const wordsRoute = require('./routes/words')
 const websiteRoute = require('./routes/website')
 const auth = require('./routes/auth')
+const score = require('./routes/score')
 const mongoose = require('mongoose')
 var cors = require('cors')
 require("dotenv").config();
@@ -39,6 +40,7 @@ app.get('/test/:id', (req,res) =>{
 app.use('/words', wordsRoute)
 app.use('/auth', auth)
 app.use('/', websiteRoute)
+app.use('/score', score)
 
 
 // establish port
