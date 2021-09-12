@@ -29,3 +29,13 @@ exports.getHighestScore = async (req, res) => {
     res.json(highestScore.score);
   } catch (error) {}
 };
+
+exports.getScoreBoard = async(req, res) => {
+  try {
+    const scoreBoard = await Score.find().sort({score : -1}).limit(5)
+    res.json(scoreBoard)
+  } catch (error) {
+    res.send(error)
+  }
+  
+}
