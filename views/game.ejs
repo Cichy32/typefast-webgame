@@ -19,7 +19,7 @@
         <p v-if="startCounter">Get ready. Game is about to start! {{ counter }}</p>
         <p v-if="startCounter || gameStoped == false">Type given text as fast as you can. Good luck!</p>
         <p v-if="gameStoped==false">Time: {{ gameCounter }}s  WPM: {{ wpm }}</p>
-        <p v-if="gameStoped==false">"{{ text[1] }}"</p>
+        <p v-if="gameStoped==false">"{{ text[textIndex] }}"</p>
         <textarea v-if="gameStoped==false"placeholder="Type here"id="inputField"></textarea>
       </div>
       <div id="footer">
@@ -32,6 +32,7 @@
         el: "#container",
         data: {
           text: JSON,
+          textIndex: 1,
           gameStoped: true,
           counter: 5,
           startCounter: false,
@@ -48,6 +49,7 @@
               .then((res) => (data = res.json()))
               .then((data) => (this.text = data.text))
               .catch((err) => console.log(err.message));
+            app.textIndex = Math.floor(Math.random() * app.text.length)
           },
           postScore(score){
             fetch("/score/save",{
@@ -102,25 +104,26 @@
               i++;
               let inputField = document.getElementById("inputField").value;
               let index = inputField.length;
-              let originalText = app.text[1].slice(0, index);
-              let originalLength = app.text[1].length;
+              let originalText = app.text[app.textIndex].slice(0, index);
+              let originalLength = app.text[app.textIndex].length;
               if (index < originalLength) {
                 if (inputField == originalText) {
-                  app.wpm = index / 5 / (app.gameCounter / 60);
+                  app.wpm = Math.round(index / 5 / (app.gameCounter / 60));
                   document.getElementById("inputField").style = "color: green";
                 } else {
                   document.getElementById("inputField").style = "color: red";
                 }
               } else {
+                let score = (index / 5) / (app.gameCounter / 60)
                 clearInterval(interval);
                 alert(
                   "Well done! Your time: " +
                     app.gameCounter +
                     "seconds. Your score: " +
-                    Math.round((index / 5) / (app.gameCounter / 60)) +
+                    Math.round(score) +
                     "WPM"
                 );
-                app.postScore(Math.round((index / 5) / (app.gameCounter / 60)))
+                app.postScore(Math.round(score))
                 setTimeout(() => {app.getHighestScore()}, 200);
                 app.gameStoped = true;
                 app.counter = 5;

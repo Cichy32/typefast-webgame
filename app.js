@@ -7,6 +7,7 @@ const wordsRoute = require('./routes/words')
 const websiteRoute = require('./routes/website')
 const auth = require('./routes/auth')
 const score = require('./routes/score')
+const Text = require('./models/Text')
 const mongoose = require('mongoose')
 var cors = require('cors')
 require("dotenv").config();
@@ -34,6 +35,19 @@ try {
 // Test request
 app.get('/test/:id', (req,res) =>{
     console.log(req.params.id)
+})
+
+// Save text to the database
+app.post('/text/update', (req,res) =>{
+    try {
+        
+        const text = new Text(req.body)
+        console.log(text)
+        const savedText = text.save()
+        res.json(savedText)
+    } catch (error) {
+        res.send(error)
+    }
 })
 
 // requests
