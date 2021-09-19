@@ -21,10 +21,13 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extends: true}))
 app.use(bodyParser.json())
 
+const dbconn = "mongodb+srv://test1:test1@cluster0.gfl40.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+
 // connect database
 try {
+    console.log(process.env.MONGODB_URI)
     mongoose.connect(
-        process.env.MONGODB_URI,
+        dbconn,
          { useUnifiedTopology: true, useNewUrlParser: true }, 
          () =>
          console.log('db connection state: '+ mongoose.connection.readyState)         );
@@ -56,6 +59,6 @@ app.use('/auth', auth)
 app.use('/', websiteRoute)
 app.use('/score', score)
 
-
+const port = process.env.PORT || 3000
 // establish port
-app.listen(3000)
+app.listen(port)
