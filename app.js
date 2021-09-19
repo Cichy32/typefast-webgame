@@ -40,7 +40,7 @@ app.get('/test/:id', (req,res) =>{
     console.log(req.params.id)
 })
 
-// Save text to the database
+// Save text to the databasee
 app.post('/text/update', (req,res) =>{
     try {
         
