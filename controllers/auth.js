@@ -4,6 +4,7 @@ const {registerValidation} = require('../controllers/validation')
 const bcrypt = require('bcrypt')
 const { use } = require('../routes/words')
 const jwt = require('jsonwebtoken')
+const websiteRoute = require('../routes/website')
 
 
 
@@ -30,7 +31,8 @@ exports.register = async (req,res) =>{
     // Add a user to the database
     try {
         const savedUser = await user.save()
-        res.send({user: user._id})
+        res.send("Register success!")
+        // res.send({user: user._id})
     } catch (error) {
         res.status(400).send(error)
     }

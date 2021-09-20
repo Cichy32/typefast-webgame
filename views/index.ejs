@@ -22,18 +22,12 @@
         </form>
       </div>
       <div id="register">
-        <form action="auth/register" method="POST" id="registerForm">
+        <form @submit.prevent="addUser" id="registerForm">
           login<br />
-          <input type="text" name="name" required /><br />
+          <input type="text" vmodel="name" id="nameData" required /><br />
           password<br />
-          <input
-            type="password"
-            v-model="password"
-            name="password"
-            id="passwordData"
-            required
-          /><br />
-          <button @click="validate" ref="submit" id="registered">
+          <input type="password" v-model="password" id="passwordData"required/><br />
+          <button type="submit">
             register
           </button>
         </form>
@@ -66,18 +60,35 @@
     </div>
     <script>
       var app = new Vue({
-        el: "#register",
+        el: "#registerForm",
         data: {
           password: "",
+          name: "d",
         },
         methods: {
           validate() {
-            let strongPassword = new RegExp(
-              "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"
-            )
-            if (!strongPassword.test(this.password)) {
-              alert('Your password has to be strong!')
-            }          
+            console.log("validate")
+            // let strongPassword = new RegExp(
+            //   "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"
+            // )
+            // if (!strongPassword.test(this.password)) {
+            //   alert('Your password has to be strong!')
+            // }          
+          },
+          async addUser(e){
+             await fetch("/auth/register",{
+              method: "POST",
+              mode: "cors",
+              headers: {
+                'Content-type': 'application/json'
+              },
+              body: JSON.stringify({
+              name: document.getElementById("nameData").value,
+              password: document.getElementById("passwordData").value
+            })
+            })     
+            .then(res => res.text())
+            .then(res => alert(res));
           },
         },
       });

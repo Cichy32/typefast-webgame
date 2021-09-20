@@ -25,7 +25,7 @@ app.use(bodyParser.json())
 try {
     console.log(process.env.MONGODB_URI)
     mongoose.connect(
-        dbconn,
+        process.env.MONGODB_URI,
          { useUnifiedTopology: true, useNewUrlParser: true }, 
          () =>
          console.log('db connection state: '+ mongoose.connection.readyState)         );
@@ -40,8 +40,7 @@ app.get('/test/:id', (req,res) =>{
 
 // Save text to the database
 app.post('/text/update', (req,res) =>{
-    try {
-        
+    try {      
         const text = new Text(req.body)
         console.log(text)
         const savedText = text.save()
