@@ -22,6 +22,7 @@
         </ul>
         <p v-if="gameStoped && startCounter == false">In order to start the game click button bellow.</p>
         <button v-on:click="startGame()"v-if="gameStoped && startCounter==false">Start game</button>
+        <button v-on:click="logout()"v-if="gameStoped && startCounter==false">Logout</button>
         <p v-if="startCounter">Get ready. Game is about to start! {{ counter }}</p>
         <p v-if="startCounter || gameStoped == false">Type given text as fast as you can. Good luck!</p>
         <p v-if="gameStoped==false">Time: {{ gameCounter }}s  WPM: {{ wpm }}</p>
@@ -159,6 +160,9 @@
                 app.gameCounter = app.gameCounter + 1;
               }
             }, 1000);
+          },
+          logout(){
+            window.open('/',"_self")
           },
         },
       });

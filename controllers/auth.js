@@ -55,7 +55,8 @@ exports.login = async (req,res) =>{
 
     // Create and assign a token
     //const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
-    res.render('game.ejs', {testObject: req.body.name})
+    res.send("1")
+    // res.render('game.ejs', {testObject: req.body.name})
     // res.header('auth-token', token).send(token)
 
 }

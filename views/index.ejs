@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title></title>
   </head>
   <body>
@@ -13,11 +14,11 @@
         <h1 class="header">Think fast, type faster!</h1>
       </div>
       <div id="login">
-        <form action="auth/login" method="POST">
+        <form @submit.prevent="login" id="loginForm">
           login<br />
-          <input type="text" id="loginData" name="name" required /><br />
+          <input type="text" id="loginName"  required /><br />
           password <br />
-          <input type="password" name="password" /><br />
+          <input type="password"  id="loginPassword"/><br />
           <button type="submit">sign in</button>
         </form>
       </div>
@@ -59,6 +60,48 @@
       </div>
     </div>
     <script>
+      var appLogin = new Vue({
+        el: "#loginForm",
+        data: {
+          name: "",
+          password: "",
+        },
+        methods:{
+          async login(){
+            await fetch("/auth/login",{
+              method: "POST",
+              mode: "cors",
+              headers: {
+                'Content-type': 'application/json'
+              },
+              body: JSON.stringify({
+              name: document.getElementById("loginName").value,
+              password: document.getElementById("loginPassword").value
+            })
+            })     
+            .then(res => res.text())
+            .then(res => {
+              if(res =="1"){
+                var form = $('<form></form>');
+
+                form.attr("method", "post");
+                form.attr("action", "/game");
+
+                  var field = $('<input></input>');
+                  field.attr("type", "hidden");
+                  field.attr("name", "name");
+                  field.attr("value", document.getElementById("loginName").value);
+                  form.append(field);
+                  $(document.body).append(form);
+                  form.submit();
+
+              }else{
+                alert(res)
+              }
+            })
+          }
+        }
+      })
       var app = new Vue({
         el: "#registerForm",
         data: {
