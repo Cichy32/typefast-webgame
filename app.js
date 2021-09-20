@@ -21,8 +21,7 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extends: true}))
 app.use(bodyParser.json())
 
-const dbconn = "mongodb+srv://test1:test1@cluster0.gfl40.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-
+// test
 // connect database
 try {
     console.log(process.env.MONGODB_URI)
@@ -40,7 +39,7 @@ app.get('/test/:id', (req,res) =>{
     console.log(req.params.id)
 })
 
-// Save text to the databasee
+// Save text to the database
 app.post('/text/update', (req,res) =>{
     try {
         
@@ -53,7 +52,6 @@ app.post('/text/update', (req,res) =>{
     }
 })
 
-// requests
 app.use('/words', wordsRoute)
 app.use('/auth', auth)
 app.use('/', websiteRoute)
