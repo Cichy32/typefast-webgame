@@ -8,7 +8,8 @@ exports.renderSite = (req,res) =>{
 
 // render the game
 exports.renderGame = (req, res) =>{
-    res.render('game.ejs',{testObject: req.body.name})
+    if (!req.body.name) return res.status(400).send('You have to be logged in')
+    res.render('game.ejs',{testObject: req.body.name})    
 }
 
 
