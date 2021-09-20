@@ -21,7 +21,6 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extends: true}))
 app.use(bodyParser.json())
 
-// test
 // connect database
 try {
     console.log(process.env.MONGODB_URI)
