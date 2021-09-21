@@ -8,6 +8,11 @@
     src: url(fonts/Montserrat-Light.ttf)
 }
 
+body{
+    color: black;
+    margin: 8px;
+}
+
 :root {
     --text-font: Bebas Neue;
     --text-font2: Montserrat;
@@ -17,8 +22,16 @@
     font-family: var(--text-font)
 }
 
+.progress-bar {
+    background-color:#8600b3;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-family: var(--text-font);
+    font-size: 20px;
+  }
+
 #container {
-    width: 770px;
+    width: 770px !important;
     height: auto;
     margin: auto;
     border-style: solid;

@@ -6,6 +6,7 @@ const { createWords: getWords } = require('./controllers/words')
 const wordsRoute = require('./routes/words')
 const websiteRoute = require('./routes/website')
 const auth = require('./routes/auth')
+const profile = require('./routes/profile')
 const score = require('./routes/score')
 const Text = require('./models/Text')
 const mongoose = require('mongoose')
@@ -54,6 +55,7 @@ app.use('/words', wordsRoute)
 app.use('/auth', auth)
 app.use('/', websiteRoute)
 app.use('/score', score)
+app.use('/profile', profile)
 
 const port = process.env.PORT || 3000
 // establish port
