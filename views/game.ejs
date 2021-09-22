@@ -7,6 +7,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <title></title>
 </head>
 
@@ -143,7 +144,6 @@
           let i = 0;
           let indexSaved = 0
           let interval = setInterval(function () {
-            i++;
             let inputField = document.getElementById("inputField").value;
             let index = inputField.length;
             let originalText = app.text[app.textIndex].slice(0, index);
@@ -155,12 +155,14 @@
                 // console.log(app.text[app.textIndex].toString().slice(index))
                 if(app.text[app.textIndex].toString()[index-1]==" "){
                   indexSaved = indexSaved + index
+                  console.log("indexSaved: "+indexSaved+" index: "+index)
                   app.text[app.textIndex] = app.text[app.textIndex].toString().slice(index)
                   document.getElementById("inputField").value = ""
-                }  
-                
-                var progress = Math.round(index/originalLength*100)
-                // $(".progress-bar").css("width", progress + "%").text(progress + " %");
+                  var progress = Math.round(indexSaved/originalLength*100)
+                  console.log("indexSavc: "+indexSaved+" originallen: "+originalLength)
+                  $(".progress-bar").css("width", progress + "%").text(progress + " %");
+                }         
+
               } else {
                 document.getElementById("inputField").style = "color: red";
                 
