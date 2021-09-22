@@ -1,4 +1,4 @@
-﻿@font-face {
+@font-face {
     font-family: Bebas Neue;
     src: url(fonts/BebasNeue-Regular.ttf);
 }
@@ -11,7 +11,7 @@
 body{
     color: black;
     margin: 20px;
-
+   
 }
 
 :root {
@@ -23,16 +23,11 @@ body{
     font-family: var(--text-font)
 }
 
-.progress-bar {
-    background-color:#8600b3;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    font-family: var(--text-font);
-    font-size: 20px;
-  }
+
 
 #container {
-    width: 770px !important;
+    /* width: 770px !important; */
+    width: 1000px !important;
     height: auto;
     margin: auto;
     border-style: solid;
@@ -52,35 +47,8 @@ body{
 
 }
 
-#login, #register {
-    font-family: var(--text-font);
-    font-size: 19px;
-    height: auto;
-    width: 280px;
-    padding: 0px 50px 10px;
-    display: inline-block;
- 
-}
-
 
 #infoContainer {
-    margin-top: 5px;
-    height: auto;
-    min-height: 400px;
-    clear: both;
-    border-top-style: solid;
-    border-top-color: #660066ee;
-    box-shadow: inset 0px 0px 4px 4px #660066ee;
-    font-family: var(--text-font2);
-    font-size: 22px;
-    font-weight: bold;
-    padding: 10px 15px 10px 15px;
-    background: url(../img/logo.png) no-repeat center center;
-
-}
-
-
-#infoContainer2{
     height: auto;
     min-height: 400px;
     clear: both;
@@ -91,15 +59,15 @@ body{
     font-size: 22px;
     font-weight: bold;
 }
+
 
 #navBar{
-    min-height:400px;
+    min-height:600px;
     width: 20%;
     display: grid;
     vertical-align: top; 
     align-items: center;
     justify-content: center; 
-
     float: left;
     box-shadow: inset 0px 0px 4px 4px #660066ee;
 }
@@ -108,11 +76,19 @@ body{
     text-align: center;
     /* background: url(../img/logo.png) no-repeat center center; */
     width: 80%;
-    height:400px;
+    height:600px;
     display: inline-block;
-    padding-top: 15px;
+    padding: 15px;
 
 }
+
+.progress-bar {
+    background-color:#8600b3;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-family: var(--text-font);
+    font-size: 20px;
+  }
 
 #footer {
     height: auto;
@@ -125,8 +101,16 @@ body{
 }
 
 img {
+    
     height: 100px;
     width: 100px;
+    border-color: #580158;
+    border-radius: 20px;
+    /* transition: 500ms linear; */
+}
+
+img:hover{
+    border-style:solid;
 }
 
 .form {
@@ -148,9 +132,10 @@ input[type=text], input[type=password], select {
 }
 button {
     font-family: var(--text-font);
-    font-size: 15px;
+    font-size: 25px;
+    font-weight: lighter;
     width: 250px;
-    height: 25px;
+    height: 45px;
     display: block;
     margin: 4px auto;
     text-align: center;
@@ -162,6 +147,11 @@ button {
 
 button:hover {
     border: 2px solid #5a015aee;
+  }
+
+
+  .progress{
+      background-color: #660066ee;
   }
 
 .header {
@@ -181,7 +171,13 @@ button:hover {
 
 textarea{
    min-width: 100%;
-   min-height: 25px;
+   height: 35px;
    font-size: 19px;
+   background-color: #fcd9fcee;
+   border: 1px solid #5a015aee;
+   border-radius: 7px;
+   font-family: var(--text-font2);
+   font-weight: bold;
+
     
 }
