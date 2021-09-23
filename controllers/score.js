@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const Score = require("../models/Score");
+const User = require("../models/User")
 
 exports.saveScore = async (req, res) => {
   const score = new Score({
@@ -33,7 +34,9 @@ exports.getHighestScore = async (req, res) => {
 exports.getScoreBoard = async(req, res) => {
   try {
     const scoreBoard = await Score.find().sort({score : -1}).limit(5)
+
     res.json(scoreBoard)
+
   } catch (error) {
     res.send(error)
   }

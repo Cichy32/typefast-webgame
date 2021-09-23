@@ -11,6 +11,7 @@
 body{
     color: black;
     margin: 20px;
+    background-color: #B36ED8;
    
 }
 
@@ -31,17 +32,18 @@ body{
     height: auto;
     margin: auto;
     border-style: solid;
-    border-color: #580158;
+    border-color: #9A3ECC;
     border-radius: 12px;
-    box-shadow: inset 0px 0px 4px 4px #660066ee;
-    background-color: #800080ee;
+    box-shadow: inset 0px 0px 4px 4px #9A3ECC;
+    background-color: #9A3ECC;
+    
     
 }
 
 #banner {
     height: 100px;
-    background-color: #6b016b;
-    box-shadow: inset 0px 0px 4px 4px #660066ee;
+    background-color: #9033C1;
+    box-shadow: inset 0px 0px 4px 4px #9033C1;
     opacity: 0.8;
     padding-top: 20px;
 
@@ -53,8 +55,8 @@ body{
     min-height: 400px;
     clear: both;
     border-top-style: solid;
-    border-top-color: #660066ee;
-    box-shadow: inset 0px 0px 4px 4px #660066ee;
+    border-top-color: #9A3ECC;
+    box-shadow: inset 0px 0px 4px 4px #9033C1;
     font-family: var(--text-font2);
     font-size: 22px;
     font-weight: bold;
@@ -69,7 +71,7 @@ body{
     align-items: center;
     justify-content: center; 
     float: left;
-    box-shadow: inset 0px 0px 4px 4px #660066ee;
+    box-shadow: inset 0px 0px 4px 4px #9033C1;
 }
 
 #main{
@@ -80,6 +82,29 @@ body{
     display: inline-block;
     padding: 15px;
 
+}
+
+#profileCard{
+    height:100%;
+    width: 350px;
+    border-style:solid;
+    display: block;
+    margin: 4px auto;
+    border: 5px solid #9033C1;
+    border-radius: 20px;
+}
+
+#profileCardBody{
+    height:100px;
+    margin-top:20px;
+    border-top: 5px solid #9033C1;
+
+}
+
+.imgProfile{
+    height: 250px;
+    width: 250px;
+    transition: 0.3s;
 }
 
 .progress-bar {
@@ -93,24 +118,26 @@ body{
 #footer {
     height: auto;
     width: auto;
-    background-color: #6b016b;
+    background-color: #9033C1;
     opacity: 0.8;
-    box-shadow: inset 0px 0px 4px 4px #660066ee;
+    box-shadow: inset 0px 0px 4px 4px #9033C1;
     text-align: center;
     padding: auto;
 }
 
-img {
-    
+.imgMenu, .imgScoreBoard{
     height: 100px;
     width: 100px;
     border-color: #580158;
     border-radius: 20px;
-    /* transition: 500ms linear; */
 }
 
-img:hover{
+.imgMenu:hover, .imgScoreBoard:hover{
     border-style:solid;
+}
+
+.imgProfile:hover{
+    transform: translateY(0.25em);
 }
 
 .form {
@@ -122,10 +149,10 @@ input[type=text], input[type=password], select {
     width: 100%;
     padding: 12px 20px;
     margin: 4px 0;
-    border: 1px solid #660066ee;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: #6b016b;
+    border: 1px solid #9033C1;
+    background-color: #9A3ECC;
 }
 *:focus {
     outline: none;
@@ -139,14 +166,16 @@ button {
     display: block;
     margin: 4px auto;
     text-align: center;
-    border: 1px solid #660066ee;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: #6b016b;
+    border: 5px solid #9033C1;
+    background-color: #9A3ECC; 
+    transition: 0.3s;
 }
 
 button:hover {
-    border: 2px solid #5a015aee;
+    transform: translateX(0.15em);
+    border: 5px solid #6C2791;
   }
 
 

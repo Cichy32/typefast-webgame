@@ -30,6 +30,7 @@
     "multer-gridfs-storage": "^5.0.1",
     "nodemon": "^2.0.12",
     "request": "^2.88.2",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "vue-js-popover": "^1.2.1"
   }
 }
