@@ -34,7 +34,7 @@
 
           <tr v-for="(item,index) in scoreBoard" :key="index"> 
             <td>{{index+1}}</td>
-            <td><img class="imgScoreBoard" v-bind:src="'../img/avatar' + 1 + '.png'"></td>
+            <td><img class="imgScoreBoard" v-bind:src="'../img/avatar' + scoreBoardAvatars[index] + '.png'"></td>
             <td>{{item.name}}</td>
             <td>{{item.score}}wpm</td>
           </tr>
@@ -105,6 +105,8 @@
         textIndex: 1,
         avatar_id: 0,
         scoreBoard: JSON,
+        scoreBoardAvatars: [0,0,0,0,0],
+        help: 0,
         gameStoped: true,
         counter: 5,
         startCounter: false,
@@ -132,6 +134,22 @@
             .then((data) => (this.avatar_id = data))
             .catch((err) => console.log(err.message));   
         },
+        async getScoreBoardAvatars(name){
+          var data = 0
+          await fetch('/profile/avatar',{
+            method: "POST",
+            mode: "cors",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              "name": name
+            })
+          })
+            .then((res) => (data = res.json()))
+            .then((data) => (this.help = data))
+            .catch((err) => console.log(err.message)); 
+        },
         async changeAvatar(id){
           await fetch('/profile/update',{
             method: "POST",
@@ -145,6 +163,7 @@
             }),
           })
           app.getAvatar()
+          app.getScoreBoard()
 
         },
         popOver(){
@@ -241,6 +260,10 @@
             .then((res) => (data = res.json()))
             .then((data) => (this.scoreBoard = data))
             .catch((err) => console.log(err.message));
+          for(var i=0;i<5;i++){
+            await app.getScoreBoardAvatars(app.scoreBoard[i].name)
+            app.scoreBoardAvatars[i] = app.help
+          }
         },
         intervalCounter() {
           let n = 0;
