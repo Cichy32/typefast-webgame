@@ -125,15 +125,22 @@ body{
     padding: auto;
 }
 
+.popover{
+    text-align: center;
+    width:250px;
+    padding-left:8px;
+}
+
 .imgMenu, .imgScoreBoard{
     height: 100px;
     width: 100px;
     border-color: #580158;
     border-radius: 20px;
+    transition: 0.3s;
 }
 
 .imgMenu:hover, .imgScoreBoard:hover{
-    border-style:solid;
+    transform: translateY(-0.25em);
 }
 
 .imgProfile:hover{
