@@ -103,6 +103,7 @@
           ],         
         text: JSON,
         textIndex: 1,
+        textLength: 0,
         avatar_id: 0,
         scoreBoard: JSON,
         scoreBoardAvatars: [0,0,0,0,0],
@@ -220,6 +221,7 @@
             .then((data) => (this.text = data.text))
             .catch((err) => console.log(err.message));
           app.textIndex = Math.floor(Math.random() * app.text.length)
+          app.textLength = app.text[app.textIndex].length
         },
         postScore(score) {
           fetch("/score/save", {
@@ -284,28 +286,25 @@
           app.startCounter = true;
           app.intervalCounter();
         },
-        validateInput(text) {
+        validateInput() {
           let i = 0;
           let indexSaved = 0
           let interval = setInterval(function () {
             let inputField = document.getElementById("inputField").value;
             let index = inputField.length;
-            let originalText = app.text[app.textIndex].slice(0, index);
-            let originalLength = app.text[app.textIndex].length;
-            if (index < originalLength) {
-              if (inputField == originalText) {
+            let currentText = app.text[app.textIndex].slice(0, index);
+            let currentLength = app.text[app.textIndex].length;
+            if (index < currentLength) {
+              if (inputField == currentText) {
                 app.wpm = Math.round(indexSaved / 5 / (app.gameCounter / 60));
                 document.getElementById("inputField").style = "color: green";
-                // console.log(app.text[app.textIndex].toString().slice(index))
                 if(app.text[app.textIndex].toString()[index-1]==" "){
                   indexSaved = indexSaved + index
-                  console.log("indexSaved: "+indexSaved+" index: "+index)
                   app.text[app.textIndex] = app.text[app.textIndex].toString().slice(index)
                   document.getElementById("inputField").value = ""
-                  var progress = Math.round(indexSaved/originalLength*100)
-                  console.log("indexSavc: "+indexSaved+" originallen: "+originalLength)
+                  var progress = Math.round(indexSaved/app.textLength*100)
                   $(".progress-bar").css("width", progress + "%").text(progress + " %");
-                }         
+                }        
 
               } else {
                 document.getElementById("inputField").style = "color: red";
