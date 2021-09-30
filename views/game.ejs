@@ -250,6 +250,7 @@
             .then((res) => (data = res.json()))
             .then((data) => (this.highestScore = data))
             .catch((err) => console.log(err.message));
+          console.log(app.highestScore)
         },
         async getScoreBoard() {
           await fetch("/score/board", {
@@ -261,11 +262,16 @@
           })
             .then((res) => (data = res.json()))
             .then((data) => (this.scoreBoard = data))
-            .catch((err) => console.log(err.message));
+            .catch((err) => console.log(err.message)); 
           for(var i=0;i<5;i++){
-            await app.getScoreBoardAvatars(app.scoreBoard[i].name)
-            app.scoreBoardAvatars[i] = app.help
-          }
+            try {
+              let name = app.scoreBoard[i].name
+              await app.getScoreBoardAvatars(name)
+              app.scoreBoardAvatars[i] = app.help
+            } catch (error) {
+              break;
+            }
+         }
         },
         intervalCounter() {
           let n = 0;

@@ -12,10 +12,8 @@ exports.renderGame = (req, res) =>{
     res.render('game.ejs',{testObject: req.body.name})    
 }
 
-
-
 // test response to website
 exports.getText = async (req,res) =>{
     const texts = await Text.$find().exec()
-    res.send(texts[0])
+    res.status(200).send(texts[0])
 }

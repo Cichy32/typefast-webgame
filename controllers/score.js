@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const Score = require("../models/Score");
-const User = require("../models/User")
-const sanitize = require("mongo-sanitize")
+const User = require("../models/User");
+const sanitize = require("mongo-sanitize");
 
 exports.saveScore = async (req, res) => {
   const score = new Score({
@@ -12,15 +12,14 @@ exports.saveScore = async (req, res) => {
     name: score.name,
     score: score.score,
   }).exec();
-  if (alreadyExists) {
-    res.send("Score already exists");
-  } else {
-    try {
-      const savedScore = await score.save();
-      res.send(savedScore);
-    } catch (error) {
-      res.send(error);
-    }
+
+  if (alreadyExists) return res.status(400).send("Score already exists");
+
+  try {
+    const savedScore = await score.save();
+    res.send(savedScore);
+  } catch (error) {
+    res.send(error);
   }
 };
 
@@ -29,17 +28,16 @@ exports.getHighestScore = async (req, res) => {
   try {
     const highestScore = await Score.findOne({ name: user }).sort("-score");
     res.json(highestScore.score);
-  } catch (error) {}
+  } catch (error) {
+    res.json("0")
+  }
 };
 
-exports.getScoreBoard = async(req, res) => {
+exports.getScoreBoard = async (req, res) => {
   try {
-    const scoreBoard = await Score.find().sort({score : -1}).limit(5)
-
-    res.json(scoreBoard)
-
+    const scoreBoard = await Score.find().sort({ score: -1 }).limit(5);
+    res.json(scoreBoard);
   } catch (error) {
-    res.send(error)
+    res.status(404).send(error);
   }
-  
-}
+};
