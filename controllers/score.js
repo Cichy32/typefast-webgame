@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const Score = require("../models/Score");
 const User = require("../models/User")
+const sanitize = require("mongo-sanitize")
 
 exports.saveScore = async (req, res) => {
   const score = new Score({

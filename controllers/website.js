@@ -16,6 +16,6 @@ exports.renderGame = (req, res) =>{
 
 // test response to website
 exports.getText = async (req,res) =>{
-    const texts = await Text.find().exec()
+    const texts = await Text.$find().exec()
     res.send(texts[0])
 }

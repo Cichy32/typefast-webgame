@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const { use } = require('../routes/words')
 const jwt = require('jsonwebtoken')
 const websiteRoute = require('../routes/website')
+const sanitize = require("mongo-sanitize")
 
 
 
@@ -24,8 +25,8 @@ exports.register = async (req,res) =>{
     
     // Create a new user
     const user = new User({
-        name: req.body.name,
-        password: hashedPassword
+        name: sanitize(req.body.name),
+        password: sanitize(hashedPassword)
     })
 
     // Add a user to the database

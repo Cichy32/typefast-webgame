@@ -51,7 +51,7 @@ app.post('/text/update', (req,res) =>{
     }
 })
 
-app.use('/words', wordsRoute)
+// app.use('/words', wordsRoute)
 app.use('/auth', auth)
 app.use('/', websiteRoute)
 app.use('/score', score)
